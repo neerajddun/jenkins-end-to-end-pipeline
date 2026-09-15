@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-dep
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-dep
+  template:
+    metadata:
+      labels:
+        app: app-dep
+    spec:
+      containers:
+        - name: app-dep
+          image: ${ECR_REGISTRY}/${APP_NAME}:${IMAGE_TAG}
+          ports:
+            - containerPort: 8080
