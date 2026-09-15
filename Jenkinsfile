@@ -133,7 +133,7 @@ pipeline {
                       --severity HIGH,CRITICAL \
                       --format json \
                       --output trivy-report.json \
-                      ${APP_NAME}}:${IMAGE_TAG}
+                      ${APP_NAME}:${IMAGE_TAG}
                 """
 
                   archiveArtifacts(

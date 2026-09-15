@@ -20,7 +20,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <tomcat.version>10.1.55</tomcat.version>
+        <tomcat.version>10.1.58</tomcat.version>
         <sonar.projectKey>my-jenkins-project</sonar.projectKey>
         <sonar.projectName>my-jenkins-project</sonar.projectName>
         <!-- Tell SonarQube exactly where JaCoCo XML report is -->
