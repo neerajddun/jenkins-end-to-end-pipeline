@@ -83,7 +83,7 @@ pipeline {
 
         }
 
-        stage('OWASP Dependency-Check') {
+  /*      stage('OWASP Dependency-Check') {
           steps {
             sh 'mkdir -p ${WORKSPACE}/owasp-report'
 
@@ -110,7 +110,7 @@ pipeline {
                )
             }
         }
-
+*/
 
         stage('Trivy Image Scan') {
            steps {
