@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: app-dep-monitor
+  namespace: monitoring 
+  labels:
+    release: prometheus
+    app: monitoring
+spec:
+  jobLabel: job
+  selector:
+    matchLabels:
+      app: app-dep # must match your Service's labels
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: web # must match the named port in your Service
+      path: /actuator/prometheus
+      interval: 30s
