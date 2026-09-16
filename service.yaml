@@ -4,6 +4,7 @@ metadata:
   name: app-service
   labels:
     app: app-dep
+    job: node-api
 spec:
   selector:
     app: app-dep
