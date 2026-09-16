@@ -29,7 +29,7 @@ spec:
             description: "{{ $labels.pod }} has restarted more than 3 times in the last 15 minutes."
 
         - alert: MyAppReplicasMismatch
-          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="monitoring"} < kube_deployment_spec_replicas{deployment="myapp", namespace="default"}
+          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="monitoring"} < kube_deployment_spec_replicas{deployment="myapp", namespace="monitoring"}
           for: 5m
           labels:
             severity: warning
