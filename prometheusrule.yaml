@@ -20,7 +20,7 @@ spec:
             description: "Prometheus has not been able to scrape {{ $labels.instance }} for more than 2 minutes."
 
         - alert: MyAppPodRestartingFrequently
-          expr: increase(kube_pod_container_status_restarts_total{namespace="default", pod=~"app-dep-.*"}[15m]) > 3
+          expr: increase(kube_pod_container_status_restarts_total{namespace="monitoring", pod=~"app-dep-.*"}[15m]) > 3
           for: 5m
           labels:
             severity: warning
@@ -29,7 +29,7 @@ spec:
             description: "{{ $labels.pod }} has restarted more than 3 times in the last 15 minutes."
 
         - alert: MyAppReplicasMismatch
-          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="default"} < kube_deployment_spec_replicas{deployment="myapp", namespace="default"}
+          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="monitoring"} < kube_deployment_spec_replicas{deployment="myapp", namespace="default"}
           for: 5m
           labels:
             severity: warning
