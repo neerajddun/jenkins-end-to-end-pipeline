@@ -176,6 +176,7 @@ pipeline {
                         kubectl apply -f service.yaml
                         kubectl apply -f prometheusrule.yaml
                         kubectl apply -f service-monitor.yaml 
+                        kubectl apply -f alertmanager-config.yaml
                     """
                 }
             }
