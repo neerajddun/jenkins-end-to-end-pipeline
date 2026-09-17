@@ -11,7 +11,7 @@ pipeline {
      environment {
 
         EKS_CLUSTER = "test-cluster"
-        ECR_REGISTRY = " 883999921903.dkr.ecr.ap-southeast-1.amazonaws.com"
+        ECR_REGISTRY = "883999921903.dkr.ecr.ap-southeast-1.amazonaws.com"
         APP_NAME = "my-repo"
         IMAGE_TAG = "v1.${BUILD_NUMBER}"
     }
@@ -166,7 +166,7 @@ pipeline {
             }
         }
 
-
+/*
         stage('Deploy to EKS') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
@@ -180,6 +180,25 @@ pipeline {
                     """
                 }
             }
+        }  */
+
+        stage('Update GitOps manifest') {
+           
+           steps {
+                
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                  
+                   sh """
+                       sed -i "s|image: .*|image: ${ECR_REGISTRY}/${APP_NAME}:${IMAGE_TAG}|" k8s/deployment.yaml
+                       git config user.email "jenkins@ci.local"
+                       git config user.name "jenkins-ci"
+                       git add k8s/deployment.yaml
+                       git commit -m "Update image to ${IMAGE_TAG}"
+                       git push https://${GIT_USER}:${GIT_TOKEN}@github.com/neerajddun/jenkins-end-to-end-pipeline.git HEAD:master
+                    
+                    """
+                }
+            }
         }
     }
 
@@ -189,6 +208,6 @@ pipeline {
 
         cleanWs()
         }
-     }
+    }
 
 }
