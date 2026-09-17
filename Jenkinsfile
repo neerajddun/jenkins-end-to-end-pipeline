@@ -184,20 +184,20 @@ pipeline {
 
         stage('Update GitOps manifest') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-creds', passwordVariable: 'userPass', usernameVariable: 'userVARS')]) {
                    sh '''
                      sed -i "s|image: .*|image: $ECR_REGISTRY/$APP_NAME:$IMAGE_TAG|" k8s/deployment.yaml
                      git config user.email "jenkins@ci.local"
                      git config user.name "jenkins-ci"
                      git add k8s/deployment.yaml
                      git commit -m "Update image to $IMAGE_TAG [skip ci]"
-                     git push https://$GIT_USER:$GIT_TOKEN@github.com/neerajddun/jenkins-end-to-end-pipeline.git HEAD:master
+                     git push https://$userPass:$userVARS@github.com/neerajddun/jenkins-end-to-end-pipeline.git HEAD:master
                    '''
                 }
             }
         }
     }
-    
+
     post {
        
        always {
