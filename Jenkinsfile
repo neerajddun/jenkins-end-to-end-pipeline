@@ -11,7 +11,7 @@ pipeline {
      environment {
 
         EKS_CLUSTER = "test-cluster"
-        ECR_REGISTRY = "883999921903.dkr.ecr.ap-southeast-1.amazonaws.com"
+        ECR_REGISTRY = " 883999921903.dkr.ecr.ap-southeast-1.amazonaws.com"
         APP_NAME = "my-repo"
         IMAGE_TAG = "v1.${BUILD_NUMBER}"
     }
