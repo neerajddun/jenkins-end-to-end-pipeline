@@ -186,7 +186,7 @@ pipeline {
            
            steps {
                 
-                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
                   
                    sh """
                        sed -i "s|image: .*|image: ${ECR_REGISTRY}/${APP_NAME}:${IMAGE_TAG}|" k8s/deployment.yaml
