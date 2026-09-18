@@ -184,10 +184,7 @@ pipeline {
 
         stage('Update GitOps manifest') {
             steps {
-                withCredentials([usernamePassword(
-                  credentialsId: 'github-creds',
-                  usernameVariable: 'GIT_USER',
-                  passwordVariable: 'GIT_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-creds', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
                   
                    sh '''
                      sed -i "s|image: .*|image: $ECR_REGISTRY/$APP_NAME:$IMAGE_TAG|" k8s/deployment.yaml
