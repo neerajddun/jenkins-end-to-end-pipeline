@@ -2,9 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: app-dep-alerts
-  namespace: monitoring
+  namespace: myapp
   labels:
-    release: kube-prometheus-stack
+    release: monitoring
     app: app-dep
 spec:
   groups:
@@ -20,7 +20,7 @@ spec:
             description: "Prometheus has not been able to scrape {{ $labels.instance }} for more than 2 minutes."
 
         - alert: MyAppPodRestartingFrequently
-          expr: increase(kube_pod_container_status_restarts_total{namespace="monitoring", pod=~"app-dep-.*"}[15m]) > 3
+          expr: increase(kube_pod_container_status_restarts_total{namespace="myapp", pod=~"app-dep-.*"}[15m]) > 3
           for: 5m
           labels:
             severity: warning
@@ -29,7 +29,7 @@ spec:
             description: "{{ $labels.pod }} has restarted more than 3 times in the last 15 minutes."
 
         - alert: MyAppReplicasMismatch
-          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="monitoring"} < kube_deployment_spec_replicas{deployment="myapp", namespace="monitoring"}
+          expr: kube_deployment_status_replicas_available{deployment="app-dep", namespace="myapp"} < kube_deployment_spec_replicas{deployment="app-dep", namespace="myapp"}
           for: 5m
           labels:
             severity: warning

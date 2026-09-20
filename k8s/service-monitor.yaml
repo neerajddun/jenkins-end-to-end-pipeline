@@ -4,7 +4,7 @@ metadata:
   name: app-dep-monitor
   namespace: monitoring
   labels:
-    release: kube-prometheus-stack
+    release: monitoring
     app: app-dep
 spec:
   jobLabel: job
@@ -13,7 +13,7 @@ spec:
       app: app-dep # must match your Service's labels
   namespaceSelector:
     matchNames:
-      - monitoring
+      - myapp
   endpoints:
     - port: web # must match the named port in your Service
       path: /actuator/prometheus
