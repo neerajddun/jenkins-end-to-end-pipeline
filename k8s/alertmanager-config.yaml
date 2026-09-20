@@ -3,9 +3,9 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: app-dep-alertconfig
-  namespace: monitoring
+  namespace: myapp
   labels:
-    release: kube-prometheus-stack # same label rule you just learned — required to be picked up
+    release: monitoring # same label rule you just learned — required to be picked up
 spec:
   route:
     receiver: slack-notifications
