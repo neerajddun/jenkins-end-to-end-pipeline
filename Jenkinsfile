@@ -187,9 +187,10 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'github-creds', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
                   
                    sh '''
-                     sed -i "s|image: .*|image: $ECR_REGISTRY/$APP_NAME:$IMAGE_TAG|" k8s/deployment.yaml
-                     git config user.email "jenkins@ci.local"
                      git config user.name "jenkins-ci"
+                     git config user.email "jenkins@ci.local"
+                     git pull  https://$GIT_USER:$GIT_TOKEN@github.com/neerajddun/jenkins-end-to-end-pipeline.git master
+                     sed -i "s|image: .*|image: $ECR_REGISTRY/$APP_NAME:$IMAGE_TAG|" k8s/deployment.yaml
                      git add k8s/deployment.yaml
                      git commit -m "Update image to $IMAGE_TAG [skip ci]"
                      git push https://$GIT_USER:$GIT_TOKEN@github.com/neerajddun/jenkins-end-to-end-pipeline.git HEAD:master
