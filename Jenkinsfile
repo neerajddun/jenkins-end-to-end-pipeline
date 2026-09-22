@@ -83,33 +83,19 @@ pipeline {
 
         }
 
-/*       stage('OWASP Dependency-Check') {
-          steps {
-            sh 'mkdir -p ${WORKSPACE}/owasp-report'
-
-             withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
-             catchError(
-                buildResult: 'SUCCESS',
-                stageResult: 'UNSTABLE'
-                )      {
-                dependencyCheck(
-                    odcInstallation: 'OWASP-DC',
-                    additionalArguments:
-                        '--scan ' + WORKSPACE +
-                        ' --format HTML' +
-                        ' --format XML' +
-                        ' --out ' + WORKSPACE + '/owasp-report' +
-                        ' --disableNodeAudit' +
-                        ' --nvdApiKey ' + env.NVD_API_KEY
-                    )
-                }
-            }
-
+        stage('Dependency Check') {
+        
+            steps {
+           
+              withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+                dependencyCheck additionalArguments: "--nvdApiKey ${NVD_API_KEY} --scan . --format ALL --out owasp-report", odcInstallation: 'OWASP-Dependency-Check'
+              }
+               
                dependencyCheckPublisher(
-                 pattern: 'owasp-report/dependency-check-report.xml'
+                pattern: 'owasp-report/dependency-check-report.xml'
                )
             }
-        }  */
+        }
 
 
         stage('Trivy Image Scan') {
