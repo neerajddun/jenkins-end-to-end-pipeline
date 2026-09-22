@@ -1,1 +1,1 @@
-This is mine jenkins end-to-end pipelien 
+This is mine jenkins end-to-end pipeline
