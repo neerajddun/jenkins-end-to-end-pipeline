@@ -182,7 +182,7 @@ pipeline {
             }
         }  */
 
-        stage('Update GitOps manifest') {
+ /*       stage('Update GitOps manifest') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-creds', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
                   
@@ -197,7 +197,7 @@ pipeline {
                    '''
                 }
             }
-        }
+        } */
     }
 
     post {
