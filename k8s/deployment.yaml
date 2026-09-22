@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: app-dep
-          image: ${ECR_REGISTRY}/${JOB_NAME}:${IMAGE_TG}
+          image: 883999921903.dkr.ecr.ap-southeast-1.amazonaws.com/my-repo:v1.10
           ports:
             - containerPort: 8080
