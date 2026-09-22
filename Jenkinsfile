@@ -82,24 +82,21 @@ pipeline {
             }
 
         }
+        
         stage('Dependency Check') {
-            
             steps {
               
-              sh 'mkdir -p owasp-report'
-                
-                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
-                
-                 sh 'dependency-check.sh --nvdApiKey $NVD_API_KEY --scan . --format ALL --out owasp-report'
-                }
+               sh 'mkdir -p owasp-report'
+               withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+               
+                dependencyCheck additionalArguments: "--nvdApiKey ${NVD_API_KEY} --scan . --format ALL --out owasp-report", odcInstallation: 'OWASP-Dependency-Check'
+               }
                  
                 dependencyCheckPublisher(
-                  
-                  pattern: 'owasp-report/dependency-check-report.xml'
+                pattern: 'owasp-report/dependency-check-report.xml'
                 )
             }
         }
-
 
         stage('Trivy Image Scan') {
            steps {
