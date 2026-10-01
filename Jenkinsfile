@@ -183,7 +183,7 @@ pipeline {
                     """
                 }
             }
-        }  
+        }  */
 
         stage('Update GitOps manifest') {
             steps {
@@ -200,7 +200,7 @@ pipeline {
                    '''
                 }
             }
-        } */
+        } 
     } 
 
     post {
