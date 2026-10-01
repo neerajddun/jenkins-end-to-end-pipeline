@@ -73,13 +73,17 @@ pipeline {
         }
         
         stage('Nexus Deploy') {
-
+           
             steps {
-
-                sh 'mvn deploy -DskipTests'
+            
+                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+                  
+                   sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests'
+                }
             }
         }
 
+        
         stage ('Docker Image') {
 
             steps {
@@ -157,11 +161,11 @@ pipeline {
                     }
 
                 }
-            }
+            }  
         }
 
-/*
-        stage('Deploy to EKS') {
+      
+      /*  stage('Deploy to EKS') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
