@@ -19,5 +19,5 @@ spec:
         - apiURL:
             name: slack-webhook-secret
             key: url
-          channel: "#alerts"
+          channel: "#all-myapp-devops"
           sendResolved: true
