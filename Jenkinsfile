@@ -76,10 +76,15 @@ pipeline {
            
             steps {
             
-                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+               nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.01-SNAPSHOTS.jar', type: 'jar']],
+                credentialsId: 'nexus-creds', 
+                groupId: 'com.example', 
+                nexusUrl: '13.212.73.78:8082',
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'maven-snapshots', 
+                version: '0.0.1-SNAPSHOT'
                   
-                   sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests'
-                }
             }
         }
 
