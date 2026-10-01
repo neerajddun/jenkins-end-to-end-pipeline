@@ -76,7 +76,7 @@ pipeline {
            
             steps {
             
-               nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.01-SNAPSHOTS.jar', type: 'jar']],
+               nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar', type: 'jar']],
                 credentialsId: 'nexus-creds', 
                 groupId: 'com.example', 
                 nexusUrl: '13.212.73.78:8082',
