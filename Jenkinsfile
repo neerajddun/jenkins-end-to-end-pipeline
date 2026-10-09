@@ -115,34 +115,36 @@ pipeline {
             }
         }
 */
+       
         stage('Trivy Image Scan') {
-           steps {
-              catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                 sh """
-                    trivy image \
-                      --exit-code 1 \
-                      --severity CRITICAL \
-                      --no-progress \
-                      ${APP_NAME}:${IMAGE_TAG}
-                 """
-              }
-           }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh """
+                        trivy image \
+                        --exit-code 1 \
+                        --severity CRITICAL \
+                        --no-progress \
+                        ${APP_NAME}:${IMAGE_TAG}
+                    """
+                }
+            }
 
-        post {
-            always {
-                sh """
-                    trivy image \
-                      --exit-code 0 \
-                      --severity HIGH,CRITICAL \
-                      --format json \
-                      --output trivy-report.json \
-                      ${APP_NAME}:${IMAGE_TAG}
-                """
+            post {
+                always {
+                    sh """
+                        trivy image \
+                        --exit-code 0 \
+                        --severity HIGH,CRITICAL \
+                        --no-progress \
+                        --format json \
+                        --output trivy-report.json \
+                        ${APP_NAME}:${IMAGE_TAG}
+                    """
 
-                  archiveArtifacts(
-                      artifacts: 'trivy-report.json',
-                      fingerprint: true
-                  )
+                    archiveArtifacts(
+                        artifacts: 'trivy-report.json',
+                        fingerprint: true
+                    )
                 }
             }
         }
