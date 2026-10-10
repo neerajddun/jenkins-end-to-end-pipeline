@@ -79,7 +79,7 @@ pipeline {
                nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar', type: 'jar']],
                 credentialsId: 'nexus-creds', 
                 groupId: 'com.example', 
-                nexusUrl: '47.129.180.159:8082',
+                nexusUrl: '18.138.22.235:8082',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'maven-snapshots', 
