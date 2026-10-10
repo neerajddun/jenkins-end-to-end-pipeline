@@ -43,3 +43,9 @@ spec:
           annotations:
             summary: "app-dep has fewer available replicas than desired"
             description: "Deployment app-dep has {{ $value }} available replicas, below the desired count."
+
+        - alert: MyAppPipelineTest
+          expr: vector(1)
+          labels:
+            severity: info
+            namespace: myapp
