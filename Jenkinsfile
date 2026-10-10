@@ -171,22 +171,6 @@ pipeline {
             }  
         }
 
-      
-      /*  stage('Deploy to EKS') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
-                    sh """
-                        aws eks update-kubeconfig --name test-cluster --region ap-southeast-1
-                        envsubst < deployment.yaml | kubectl apply -f -
-                        kubectl apply -f service.yaml
-                        kubectl apply -f prometheusrule.yaml
-                        kubectl apply -f service-monitor.yaml 
-                        kubectl apply -f alertmanager-config.yaml
-                    """
-                }
-            }
-        }  */
-
         stage('Update GitOps manifest') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-creds', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
