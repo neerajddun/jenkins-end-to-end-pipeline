@@ -106,7 +106,7 @@ pipeline {
                sh 'mkdir -p owasp-report'
                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
                
-                dependencyCheck additionalArguments: "--nvdApiKey ${NVD_API_KEY} --scan . --format ALL --out owasp-report", odcInstallation: 'OWASP-Dependency-Check'
+                dependencyCheck additionalArguments: "--nvdApiKey ${NVD_API_KEY} --scan . --format ALL --out owasp-report", odcInstallation: 'OWASP-DC'
                }
                  
                 dependencyCheckPublisher(
