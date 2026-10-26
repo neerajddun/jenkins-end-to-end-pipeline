@@ -72,21 +72,16 @@ pipeline {
             }
         }
         
-        stage('Nexus Deploy') {
+        stage('Publish to Nexus') {
+          
+          steps {
            
-            steps {
-            
-               nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar', type: 'jar']],
-                credentialsId: 'nexus-creds', 
-                groupId: 'com.example', 
-                nexusUrl: '18.138.22.235:8082',
-                nexusVersion: 'nexus3',
-                protocol: 'http',
-                repository: 'maven-snapshots', 
-                version: '0.0.1-SNAPSHOT'
-                  
-            }
+            configFileProvider([configFile(fileId: '649aee40-9f5d-483c-a96a-59e8460f8443', variable: 'MAVEN_SETTINGS')]) {
+            sh 'mvn -s $MAVEN_SETTINGS clean deploy -DskipTests'
+       
         }
+    }
+}
 
 
         stage ('Docker Image') {
