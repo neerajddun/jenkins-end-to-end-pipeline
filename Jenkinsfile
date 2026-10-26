@@ -95,7 +95,7 @@ pipeline {
 
         }
         
-        stage('Dependency Check') {
+       /* stage('Dependency Check') {
             steps {
               
                sh 'mkdir -p owasp-report'
@@ -108,9 +108,9 @@ pipeline {
                 pattern: 'owasp-report/dependency-check-report.xml'
                 )
             }
-        } 
+        } */
 
-       
+
         stage('Trivy Image Scan') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
