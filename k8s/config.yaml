@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfig
+  namespace: myapp
+data:
+  env: "Test"

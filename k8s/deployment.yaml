@@ -23,3 +23,6 @@ spec:
           image: 883999921903.dkr.ecr.ap-southeast-1.amazonaws.com/my-repo:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: myconfig
