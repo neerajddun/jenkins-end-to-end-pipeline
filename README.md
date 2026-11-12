@@ -8,5 +8,5 @@ Jenkins builds, tests and scans the app, pushes the image to Docker Hub, and com
 
 ![Jenkins pipeline stages](pipeline2.image.webp)
 
-![Jenkins pipeline](desk1.image.webp)
+![Jenkins pipeline](desk1.webp)
 
