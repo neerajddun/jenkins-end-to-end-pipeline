@@ -18,14 +18,14 @@ Argo CD watches the `k8s/` folder and syncs the app automatically. The applicati
 
 Prometheus scrapes both app pods through the ServiceMonitor.
 
-![Prometheus targets](prometheus-targets.png)
+![Prometheus targets](prometheus-targets.webp)
 
 Grafana dashboard for replicas, CPU usage, pod restarts and target status.
 
-![Grafana dashboard](grafana-dashboard.png)
+![Grafana dashboard](grafana-dashboard.webp)
 
 ## Alerting
 
 Alertmanager sends firing and resolved alerts to Slack.
 
-![Slack alerts](slack-alerts.png)
+![Slack alerts](slack-alerts.webp)
